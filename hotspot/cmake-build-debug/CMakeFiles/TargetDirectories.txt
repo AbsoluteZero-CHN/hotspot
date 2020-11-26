@@ -1,0 +1,3 @@
+/home/caohao/open-source/openjdk8/openjdk/hotspot/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/caohao/open-source/openjdk8/openjdk/hotspot/cmake-build-debug/CMakeFiles/hotspot.dir
+/home/caohao/open-source/openjdk8/openjdk/hotspot/cmake-build-debug/CMakeFiles/edit_cache.dir
