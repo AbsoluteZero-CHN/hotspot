@@ -569,6 +569,7 @@ void java_lang_Class::initialize_mirror_fields(KlassHandle k,
   InstanceKlass::cast(k())->do_local_static_fields(&initialize_static_field, mirror, CHECK);
 }
 
+// TODO 创建镜像类
 void java_lang_Class::create_mirror(KlassHandle k, Handle class_loader,
                                     Handle protection_domain, TRAPS) {
   assert(k->java_mirror() == NULL, "should only assign mirror once");
@@ -632,6 +633,7 @@ void java_lang_Class::create_mirror(KlassHandle k, Handle class_loader,
     // Setup indirection from klass->mirror last
     // after any exceptions can happen during allocations.
     if (!k.is_null()) {
+        // TODO  让 klassOop 引用刚刚实例化的 java.lang.Class 对象
       k->set_java_mirror(mirror());
     }
   } else {

@@ -148,6 +148,7 @@ class PackageInfo;
 class SharedPathsMiscInfo;
 template <MEMFLAGS F> class HashtableBucket;
 
+// TODO Bootstrap ClassLoader
 class ClassLoader: AllStatic {
  public:
   enum SomeConstants {

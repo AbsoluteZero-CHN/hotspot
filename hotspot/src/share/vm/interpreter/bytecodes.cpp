@@ -292,6 +292,8 @@ void Bytecodes::initialize() {
 
   //  Java bytecodes
   //  bytecode               bytecode name           format   wide f.   result tp  stk traps
+  // TODO 这里定义了字节码指令的格式
+  //  format 字段
   def(_nop                 , "nop"                 , "b"    , NULL    , T_VOID   ,  0, false);
   def(_aconst_null         , "aconst_null"         , "b"    , NULL    , T_OBJECT ,  1, false);
   def(_iconst_m1           , "iconst_m1"           , "b"    , NULL    , T_INT    ,  1, false);

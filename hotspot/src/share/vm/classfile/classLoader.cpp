@@ -1121,6 +1121,7 @@ instanceKlassHandle ClassLoader::load_classfile(Symbol* h_name, TRAPS) {
     ClassLoaderData* loader_data = ClassLoaderData::the_null_class_loader_data();
     Handle protection_domain;
     TempNewSymbol parsed_name = NULL;
+    // TODO 其实 Bootstrap ClassLoader 只是简单调用了 ClassFileParser::parseClassFile 接口来解析并加载 Java 类
     instanceKlassHandle result = parser.parseClassFile(h_name,
                                                        loader_data,
                                                        protection_domain,

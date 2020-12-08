@@ -1447,6 +1447,7 @@ address InterpreterGenerator::generate_normal_entry(bool synchronized) {
   }
 
   // initialize fixed part of activation frame
+  // TODO 创建栈帧
   generate_fixed_frame(false);
 
   // make sure method is not native & not abstract
@@ -1534,6 +1535,8 @@ address InterpreterGenerator::generate_normal_entry(bool synchronized) {
   // jvmti support
   __ notify_method_entry();
 
+  // TODO 跳转到 Java 方法的第一条字节码指令
+  //  __ 是一个宏
   __ dispatch_next(vtos);
 
   // invocation counter overflow

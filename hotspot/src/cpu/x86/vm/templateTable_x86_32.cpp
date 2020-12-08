@@ -3190,6 +3190,7 @@ void TemplateTable::invokedynamic(int byte_no) {
 //----------------------------------------------------------------------------------------------------
 // Allocation
 
+// TODO 32bit Intel 处理器 new 指令对应实现
 void TemplateTable::_new() {
   transition(vtos, atos);
   __ get_unsigned_2_byte_index_at_bcp(rdx, 1);

@@ -241,6 +241,7 @@ void TemplateTable::def(Bytecodes::Code code, int flags, TosState in, TosState o
   #define astore TemplateTable::astore
 #endif // TEMPLATE_TABLE_BUG
 
+// TODO 译码函数
 void TemplateTable::initialize() {
   if (_is_initialized) return;
 
@@ -258,6 +259,10 @@ void TemplateTable::initialize() {
   const int  iswd = 1 << Template::wide_bit;
   //                                    interpr. templates
   // Java spec bytecodes                ubcp|disp|clvm|iswd  in    out   generator             argument
+  // TODO def 函数对每一个字节码指令进行定义
+  //  def 函数总共9个入参：
+  //  1.字节码指令编码
+  //  8.该指令的汇编生成器
   def(Bytecodes::_nop                 , ____|____|____|____, vtos, vtos, nop                 ,  _           );
   def(Bytecodes::_aconst_null         , ____|____|____|____, vtos, atos, aconst_null         ,  _           );
   def(Bytecodes::_iconst_m1           , ____|____|____|____, vtos, itos, iconst              , -1           );

@@ -1988,6 +1988,7 @@ void ClassFileParser::copy_method_annotations(ConstMethod* cm,
 // from the method back up to the containing klass. These flag values
 // are added to klass's access_flags.
 
+// TODO 解析方法
 methodHandle ClassFileParser::parse_method(bool is_interface,
                                            AccessFlags *promoted_flags,
                                            TRAPS) {
@@ -1997,8 +1998,10 @@ methodHandle ClassFileParser::parse_method(bool is_interface,
   // Parse fixed parts
   cfs->guarantee_more(8, CHECK_(nullHandle)); // access_flags, name_index, descriptor_index, attributes_count
 
+  // TODO 读取和验证 Java 方法的访问标识、名称
   int flags = cfs->get_u2_fast();
   u2 name_index = cfs->get_u2_fast();
+
   int cp_size = _cp->length();
   check_property(
     valid_symbol_at(name_index),
@@ -2039,6 +2042,7 @@ methodHandle ClassFileParser::parse_method(bool is_interface,
   access_flags.set_flags(flags & JVM_RECOGNIZED_METHOD_MODIFIERS);
 
   // Default values for code and exceptions attribute elements
+  // TODO 定义方法的相关内部属性
   u2 max_stack = 0;
   u2 max_locals = 0;
   u4 code_length = 0;
@@ -2088,6 +2092,7 @@ methodHandle ClassFileParser::parse_method(bool is_interface,
   int annotation_default_length = 0;
 
   // Parse code and exceptions attribute
+  // TODO 解析方法的属性
   u2 method_attributes_count = cfs->get_u2_fast();
   while (method_attributes_count--) {
     cfs->guarantee_more(6, CHECK_(nullHandle));  // method_attribute_name_index, method_attribute_length
@@ -3841,6 +3846,7 @@ instanceKlassHandle ClassFileParser::parseClassFile(Symbol* name,
   _relax_verify = Verifier::relax_verify_for(class_loader());
 
   // Constant pool
+  // TODO 解析常量池
   constantPoolHandle cp = parse_constant_pool(CHECK_(nullHandle));
 
   int cp_size = cp->length();
@@ -3937,6 +3943,7 @@ instanceKlassHandle ClassFileParser::parseClassFile(Symbol* name,
     u2 java_fields_count = 0;
     // Fields (offsets are filled in later)
     FieldAllocationCount fac;
+    // TODO 解析 Java 类字段
     Array<u2>* fields = parse_fields(class_name,
                                      access_flags.is_interface(),
                                      &fac, &java_fields_count,
@@ -3945,6 +3952,7 @@ instanceKlassHandle ClassFileParser::parseClassFile(Symbol* name,
     bool has_final_method = false;
     AccessFlags promoted_flags;
     promoted_flags.set_flags(0);
+    // TODO 解析 Java 类方法
     Array<Method*>* methods = parse_methods(access_flags.is_interface(),
                                             &promoted_flags,
                                             &has_final_method,
@@ -4139,6 +4147,7 @@ instanceKlassHandle ClassFileParser::parseClassFile(Symbol* name,
     this_klass->initialize_supers(super_klass(), CHECK_(nullHandle));
 
     // Initialize itable offset tables
+    // TODO 设置 itable 偏移表
     klassItable::setup_itable_offset_table(this_klass);
 
     // Compute transitive closure of interfaces this class implements
@@ -4987,6 +4996,7 @@ void ClassFileParser::verify_legal_method_name(Symbol* name, TRAPS) {
   bool legal = false;
 
   if (length > 0) {
+      // TODO 如果方法名以 '<' 开头， 则判定为编译器自动生成的方法, 所以方法名不得以 '<' 开头
     if (bytes[0] == '<') {
       if (name == vmSymbols::object_initializer_name() || name == vmSymbols::class_initializer_name()) {
         legal = true;

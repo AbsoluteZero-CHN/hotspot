@@ -33,6 +33,7 @@
 
 inline HeapWord* ThreadLocalAllocBuffer::allocate(size_t size) {
   invariants();
+  // TODO 获取当前 top
   HeapWord* obj = top();
   if (pointer_delta(end(), obj) >= size) {
     // successful thread-local allocation
@@ -45,6 +46,7 @@ inline HeapWord* ThreadLocalAllocBuffer::allocate(size_t size) {
 #endif // ASSERT
     // This addition is safe because we know that top is
     // at least size below end, so the add can't wrap.
+    // TODO 重置 top
     set_top(obj + size);
 
     invariants();

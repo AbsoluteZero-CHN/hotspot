@@ -503,6 +503,11 @@ void TemplateInterpreterGenerator::set_short_entry_points(Template* t, address& 
 
 //------------------------------------------------------------------------------------------------------------------------
 
+// TODO 生成机器指令函数
+//  主要做了两件事：
+//  1. 为 Java 字节码指令生成对应的汇编指令
+//  2. 实现字节码指令的跳转
+//  函数的第一个参数是 Template*，Template便是解释其为每个 Java 字节码指令所定义的汇编模板
 void TemplateInterpreterGenerator::generate_and_dispatch(Template* t, TosState tos_out) {
   if (PrintBytecodeHistogram)                                    histogram_bytecode(t);
 #ifndef PRODUCT
@@ -536,6 +541,9 @@ void TemplateInterpreterGenerator::generate_and_dispatch(Template* t, TosState t
 #endif // ASSERT
   } else {
     // dispatch to next bytecode
+    // TODO 生成跳转（取指逻辑）
+    //  第二个个入参是 step, 是Java字节码指令的步长， 意思是字节码指令所占用的数据宽度， 单位 1byte
+    //  具体实现见： InterpreterMacroAssembler::dispatch_epilog
     __ dispatch_epilog(tos_out, step);
   }
 }

@@ -34,6 +34,7 @@
 // NOTE: replicated in SA in vm/agent/sun/jvm/hotspot/interpreter/Bytecodes.java
 class Bytecodes: AllStatic {
  public:
+    // TODO JVM 指令集定义
   enum Code {
     _illegal              =  -1,
 

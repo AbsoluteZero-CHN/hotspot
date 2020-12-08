@@ -505,8 +505,10 @@ void InterpreterMacroAssembler::dispatch_only_noverify(TosState state) {
 
 void InterpreterMacroAssembler::dispatch_next(TosState state, int step) {
   // load next bytecode (load before advancing rsi to prevent AGI)
+  // TODO 加载下一个字节码指令
   load_unsigned_byte(rbx, Address(rsi, step));
   // advance rsi
+  // TODO rsi 总是指向当前字节码指令的位置， step 是当前指令的步长
   increment(rsi, step);
   dispatch_base(state, Interpreter::dispatch_table(state));
 }

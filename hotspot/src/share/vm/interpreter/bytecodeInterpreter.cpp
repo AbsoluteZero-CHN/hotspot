@@ -2161,6 +2161,7 @@ run:
       CASE(_new): {
         u2 index = Bytes::get_Java_u2(pc+1);
         ConstantPool* constants = istate->method()->constants();
+        // TODO 如果目标 Java 类已经解析
         if (!constants->tag_at(index).is_unresolved_klass()) {
           // Make sure klass is initialized and doesn't have a finalizer
           Klass* entry = constants->slot_at(index).get_klass();
@@ -2168,26 +2169,31 @@ run:
           Klass* k_entry = (Klass*) entry;
           assert(k_entry->oop_is_instance(), "Should be InstanceKlass");
           InstanceKlass* ik = (InstanceKlass*) k_entry;
+          // TODO 如果符合快速分配场景
           if ( ik->is_initialized() && ik->can_be_fastpath_allocated() ) {
             size_t obj_size = ik->size_helper();
             oop result = NULL;
             // If the TLAB isn't pre-zeroed then we'll have to do it
             bool need_zero = !ZeroTLAB;
             if (UseTLAB) {
-              result = (oop) THREAD->tlab().allocate(obj_size);
+                // TODO 先在 TLAB 上分配
+                result = (oop) THREAD->tlab().allocate(obj_size);
             }
             // Disable non-TLAB-based fast-path, because profiling requires that all
             // allocations go through InterpreterRuntime::_new() if THREAD->tlab().allocate
             // returns NULL.
 #ifndef CC_INTERP_PROFILE
+            // TODO 分配失败则在 eden 区上分配
             if (result == NULL) {
               need_zero = true;
               // Try allocate in shared eden
             retry:
               HeapWord* compare_to = *Universe::heap()->top_addr();
+              // TODO 指针碰撞分配法
               HeapWord* new_top = compare_to + obj_size;
               if (new_top <= *Universe::heap()->end_addr()) {
-                if (Atomic::cmpxchg_ptr(new_top, Universe::heap()->top_addr(), compare_to) != compare_to) {
+                  // TODO CAS 操作
+                  if (Atomic::cmpxchg_ptr(new_top, Universe::heap()->top_addr(), compare_to) != compare_to) {
                   goto retry;
                 }
                 result = (oop) compare_to;
@@ -2196,6 +2202,7 @@ run:
 #endif
             if (result != NULL) {
               // Initialize object (if nonzero size and need) and then the header
+              // TODO TLAB 区清零
               if (need_zero ) {
                 HeapWord* to_zero = (HeapWord*) result + sizeof(oopDesc) / oopSize;
                 obj_size -= sizeof(oopDesc) / oopSize;
@@ -2213,12 +2220,15 @@ run:
               // Must prevent reordering of stores for object initialization
               // with stores that publish the new object.
               OrderAccess::storestore();
+              // TODO 将对象压入栈顶指针(之所以直接入栈顶而不是存入局部变量表,是因为 new 指令后一定会跟随 dup 和 invokespecial -> 调用构造函数 指令)
               SET_STACK_OBJECT(result, 0);
+              // TODO 更新程序计数器 PC, 取下一条字节码指令
               UPDATE_PC_AND_TOS_AND_CONTINUE(3, 1);
             }
           }
         }
         // Slow case allocation
+        // TODO 慢分配
         CALL_VM(InterpreterRuntime::_new(THREAD, METHOD->constants(), index),
                 handle_exception);
         // Must prevent reordering of stores for object initialization
