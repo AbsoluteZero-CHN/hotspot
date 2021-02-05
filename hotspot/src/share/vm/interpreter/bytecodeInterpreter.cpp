@@ -1801,13 +1801,16 @@ run:
 
       /* monitorenter and monitorexit for locking/unlocking an object */
 
+      // TODO syncronized 代码块进入指令
       CASE(_monitorenter): {
+        // TODO 从栈顶取到锁对象
         oop lockee = STACK_OBJECT(-1);
         // derefing's lockee ought to provoke implicit null check
         CHECK_NULL(lockee);
         // find a free monitor or one already allocated for this object
         // if we find a matching object then we need a new monitor
         // since this is recursive enter
+        // TODO 找到一个空闲的监视器或为已经给这个对象分配的监视器
         BasicObjectLock* limit = istate->monitor_base();
         BasicObjectLock* most_recent = (BasicObjectLock*) istate->stack_base();
         BasicObjectLock* entry = NULL;
@@ -2000,6 +2003,7 @@ run:
           //
           TosState tos_type = cache->flag_state();
           int field_offset = cache->f2_as_index();
+          // TODO volatile 修饰
           if (cache->is_volatile()) {
             if (support_IRIW_for_not_multiple_copy_atomic_cpu) {
               OrderAccess::fence();

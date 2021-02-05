@@ -84,6 +84,7 @@ inline void OrderAccess::fence() {
   FULL_MEM_BARRIER;
 }
 
+// TODO 这里的 acquire() 函数就是内存读屏障
 inline jbyte    OrderAccess::load_acquire(volatile jbyte*   p) { jbyte data = *p; acquire(); return data; }
 inline jshort   OrderAccess::load_acquire(volatile jshort*  p) { jshort data = *p; acquire(); return data; }
 inline jint     OrderAccess::load_acquire(volatile jint*    p) { jint data = *p; acquire(); return data; }
