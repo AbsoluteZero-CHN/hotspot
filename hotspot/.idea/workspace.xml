@@ -117,18 +117,18 @@
     </state>
     <state x="490" y="229" key="#com.intellij.execution.impl.EditConfigurationsDialog/51.24.1598.902@51.24.1598.902" timestamp="1603179279330" />
     <state x="564" y="264" key="#com.intellij.execution.impl.EditConfigurationsDialog/51.24.1869.1056@51.24.1869.1056" timestamp="1606372846310" />
-    <state x="51" y="-4" width="1869" height="1084" key="CommitChangelistDialog2" timestamp="1606372644655">
+    <state x="51" y="24" width="1869" height="1056" key="CommitChangelistDialog2" timestamp="1612491550402">
       <screen x="51" y="24" width="1869" height="1056" />
     </state>
-    <state x="51" y="-4" width="1869" height="1084" key="CommitChangelistDialog2/51.24.1869.1056@51.24.1869.1056" timestamp="1606372644655" />
+    <state x="51" y="24" width="1869" height="1056" key="CommitChangelistDialog2/51.24.1869.1056@51.24.1869.1056" timestamp="1612491550402" />
     <state width="527" height="506" key="DebuggerActiveHint" timestamp="1601194981754">
       <screen x="51" y="24" width="1869" height="1056" />
     </state>
     <state width="527" height="506" key="DebuggerActiveHint/51.24.1869.1056@51.24.1869.1056" timestamp="1601194981754" />
-    <state x="238" y="102" key="DiffContextDialog" timestamp="1607408921983">
+    <state x="238" y="102" key="DiffContextDialog" timestamp="1612491567668">
       <screen x="51" y="24" width="1869" height="1056" />
     </state>
-    <state x="238" y="102" key="DiffContextDialog/51.24.1869.1056@51.24.1869.1056" timestamp="1607408921983" />
+    <state x="238" y="102" key="DiffContextDialog/51.24.1869.1056@51.24.1869.1056" timestamp="1612491567668" />
     <state x="526" y="300" key="FileChooserDialogImpl" timestamp="1606369842802">
       <screen x="51" y="24" width="1869" height="1056" />
     </state>
@@ -169,10 +169,10 @@
       <screen x="51" y="24" width="1869" height="1056" />
     </state>
     <state x="747" y="232" key="RollbackChangesDialog/51.24.1869.1056@51.24.1869.1056" timestamp="1607418237434" />
-    <state x="601" y="210" key="Vcs.Push.Dialog.v2" timestamp="1606373205886">
+    <state x="601" y="210" key="Vcs.Push.Dialog.v2" timestamp="1612491552617">
       <screen x="51" y="24" width="1869" height="1056" />
     </state>
-    <state x="601" y="210" key="Vcs.Push.Dialog.v2/51.24.1869.1056@51.24.1869.1056" timestamp="1606373205886" />
+    <state x="601" y="210" key="Vcs.Push.Dialog.v2/51.24.1869.1056@51.24.1869.1056" timestamp="1612491552617" />
     <state x="646" y="367" key="com.intellij.ide.util.TipDialog" timestamp="1606383713059">
       <screen x="51" y="24" width="1869" height="1056" />
     </state>
@@ -187,6 +187,10 @@
     </state>
     <state x="548" y="128" width="707" height="669" key="find.popup/51.24.1598.902@51.24.1598.902" timestamp="1611885223889" />
     <state x="632" y="146" width="779" height="783" key="find.popup/51.24.1869.1056@51.24.1869.1056" timestamp="1611888756191" />
+    <state x="717" y="233" key="git4idea.branch.GitSmartOperationDialog" timestamp="1612491568869">
+      <screen x="51" y="24" width="1869" height="1056" />
+    </state>
+    <state x="717" y="233" key="git4idea.branch.GitSmartOperationDialog/51.24.1869.1056@51.24.1869.1056" timestamp="1612491568869" />
     <state x="649" y="246" key="run.anything.popup" timestamp="1606384209663">
       <screen x="51" y="24" width="1869" height="1056" />
     </state>
